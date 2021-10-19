@@ -1,6 +1,7 @@
 package subway.stations;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.Reader;
 import java.nio.file.Files;
@@ -21,28 +22,12 @@ public class SubwayStations {
         public List<Double> getCoordinates(){return geometry.coordinates;}
     }
 
-//    public void getStations(){
-//        try {
-//            Gson gson = new Gson();
-//            Reader reader = Files.newBufferedReader(Paths.get("SubwayStations.json"));
-//
-//            Feature feature = gson.fromJson(reader, Feature.class);
-//            System.out.println(feature.properties.name);
-//
-//            reader.close();
-//
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//    }
-
-    public static void main(String[] args) {
+    public void parseJson(){
         try {
             Gson gson = new Gson();
             Reader reader = Files.newBufferedReader(Paths.get("SubwayStations.json"));
 
-            Feature feature = gson.fromJson(reader, Feature.class);
-            System.out.println(feature.properties.name);
+            SubwayStations stations = gson.fromJson(reader, SubwayStations.class);
 
             reader.close();
 
