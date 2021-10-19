@@ -21,20 +21,6 @@ public class SubwayStations {
         //public List<String> getConnections(){return properties.connections;}
         public List<Double> getCoordinates(){return geometry.coordinates;}
     }
-
-    public void parseJson(){
-        try {
-            Gson gson = new Gson();
-            Reader reader = Files.newBufferedReader(Paths.get("SubwayStations.json"));
-
-            SubwayStations stations = gson.fromJson(reader, SubwayStations.class);
-
-            reader.close();
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
 }
 
 class Properties{
