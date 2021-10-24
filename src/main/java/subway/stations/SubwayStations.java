@@ -1,7 +1,6 @@
 package subway.stations;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.Reader;
 import java.nio.file.Files;
@@ -18,7 +17,6 @@ public class SubwayStations {
 
         public String getName(){return properties.name;}
         public int getObjectId(){return Integer.parseInt(properties.objectid);}
-        //public List<String> getConnections(){return properties.connections;}
         public List<Double> getCoordinates(){return geometry.coordinates;}
     }
 
@@ -40,7 +38,6 @@ public class SubwayStations {
 class Properties{
     String name;
     String objectid;
-    //List<String> connections;
 }
 
 class Geometry{
