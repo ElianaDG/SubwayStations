@@ -1,6 +1,0 @@
-subway/stations/SubwayStationsTest.java
- subway.stations.SubwayStationsTest
-subway/stations/StationConnectionsTest.java
- subway.stations.StationConnectionsTest
-subway/stations/SubwayLinesTest.java
- subway.stations.SubwayLinesTest
