@@ -50,6 +50,7 @@ public class SubwayStationsTest {
         //then
         Assertions.assertNotNull(connections);
         Assertions.assertEquals("263",connections.get(0));
+        Assertions.assertTrue(connections.contains("171"));
 
     }
 }
