@@ -23,12 +23,12 @@ public class SubwayStationsTest {
         reader.close();
 
         //then
-        Assertions.assertNotNull(stationsList.features.get(0));
-        Assertions.assertNotNull(stationsList.features.get(0).geometry.coordinates.get(1));
-        Assertions.assertNotNull(stationsList.features.get(0).properties.name);
-        Assertions.assertNotNull(stationsList.features.get(0).properties.objectid);
-        Assertions.assertNotNull(stationsList.features.get(0).getCoordinates());
-        Assertions.assertNotNull(stationsList.features.get(0).getName());
+        Assertions.assertNotNull(stationsList.stations.get(0));
+        Assertions.assertNotNull(stationsList.stations.get(0).geometry.coordinates.get(1));
+        Assertions.assertNotNull(stationsList.stations.get(0).properties.name);
+        Assertions.assertNotNull(stationsList.stations.get(0).properties.objectid);
+        Assertions.assertNotNull(stationsList.stations.get(0).getCoordinates());
+        Assertions.assertNotNull(stationsList.stations.get(0).getName());
     }
 
     @Test
