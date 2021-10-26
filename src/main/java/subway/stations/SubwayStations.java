@@ -11,9 +11,9 @@ import java.util.List;
 
 public class SubwayStations {
 
-    List<Station> stations;
+    List<Feature> features;
 
-    public static class Station {
+    public static class Feature {
         Properties properties;
         Geometry geometry;
 
@@ -21,7 +21,7 @@ public class SubwayStations {
         public int getObjectId(){return Integer.parseInt(properties.objectid);}
         public List<Double> getCoordinates(){return geometry.coordinates;}
     }
-    
+
     public List<String> getConnections(String stationName) throws IOException {
         Gson gson = new Gson();
         Reader reader = Files.newBufferedReader(Paths.get("SubwayStations.json"));
@@ -35,12 +35,12 @@ public class SubwayStations {
 
         List<String> stationNames = new ArrayList<>();
 
-        for(int ix = 0; ix < stations.stations.size(); ix++){
-            stationNames.add(stations.stations.get(ix).properties.name);
+        for(int ix = 0; ix < stations.features.size(); ix++){
+            stationNames.add(stations.features.get(ix).properties.name);
         }
 
         int stationIndex = stationNames.indexOf(stationName);
-        String stationId = stations.stations.get(stationIndex).properties.objectid;
+        String stationId = stations.features.get(stationIndex).properties.objectid;
 
         List<String> connections = new ArrayList<>();
 
