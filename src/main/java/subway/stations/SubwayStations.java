@@ -11,9 +11,9 @@ import java.util.List;
 
 public class SubwayStations {
 
-    List<Feature> features;
+    List<Station> stations;
 
-    public static class Feature{
+    public static class Station {
         Properties properties;
         Geometry geometry;
 
@@ -35,12 +35,12 @@ public class SubwayStations {
 
         List<String> stationNames = new ArrayList<>();
 
-        for(int ix = 0; ix < stations.features.size(); ix++){
-            stationNames.add(stations.features.get(ix).properties.name);
+        for(int ix = 0; ix < stations.stations.size(); ix++){
+            stationNames.add(stations.stations.get(ix).properties.name);
         }
 
         int stationIndex = stationNames.indexOf(stationName);
-        String stationId = stations.features.get(stationIndex).properties.objectid;
+        String stationId = stations.stations.get(stationIndex).properties.objectid;
 
         List<String> connections = new ArrayList<>();
 
