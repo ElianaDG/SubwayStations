@@ -21,6 +21,7 @@ public class SubwayStations {
         public int getObjectId(){return Integer.parseInt(properties.objectid);}
         public List<Double> getCoordinates(){return geometry.coordinates;}
     }
+<<<<<<< HEAD
 
     public List<String> getConnections(String stationName) throws IOException {
         Gson gson = new Gson();
@@ -147,6 +148,8 @@ public class SubwayStations {
 
         return connections;
     }
+=======
+>>>>>>> 5f873781f2b9b5741fe005c08f44ec9af4fb36ac
 }
 
 class Properties{
