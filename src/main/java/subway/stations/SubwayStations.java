@@ -147,7 +147,6 @@ public class SubwayStations {
 
         return connections;
     }
-
 }
 
 class Properties{
