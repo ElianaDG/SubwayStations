@@ -21,7 +21,7 @@ public class SubwayStations {
         public int getObjectId(){return Integer.parseInt(properties.objectid);}
         public List<Double> getCoordinates(){return geometry.coordinates;}
     }
-
+  
     public List<String> getConnections(String stationName) throws IOException {
         Gson gson = new Gson();
         Reader reader = Files.newBufferedReader(Paths.get("SubwayStations.json"));
