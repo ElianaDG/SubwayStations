@@ -39,9 +39,6 @@ public class SubwayStationsTest {
 
         SubwayStations stationsList = gson.fromJson(reader, SubwayStations.class);
 
-        reader = Files.newBufferedReader(Paths.get("SubwayLines.json"));
-        SubwayLines subwayLines = gson.fromJson(reader, SubwayLines.class);
-
         reader.close();
 
         //when
