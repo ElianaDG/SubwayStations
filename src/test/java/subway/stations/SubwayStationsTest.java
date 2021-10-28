@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 public class SubwayStationsTest {
 
@@ -36,18 +39,25 @@ public class SubwayStationsTest {
         //given
         Gson gson = new Gson();
         Reader reader = Files.newBufferedReader(Paths.get("SubwayStations.json"));
+        SubwayStations stations = gson.fromJson(reader, SubwayStations.class);
 
-        SubwayStations stationsList = gson.fromJson(reader, SubwayStations.class);
+        reader = Files.newBufferedReader(Paths.get("SubwayLines.json"));
+        SubwayLines subwayLines = gson.fromJson(reader, SubwayLines.class);
 
         reader.close();
 
+        SubwayStations.Station station1 = stations.stations.get(416);
+        SubwayStations.Station station2 = stations.stations.get(399);
+        SubwayStations.Station station3 = stations.stations.get(415);
+        SubwayStations.Station station4 = stations.stations.get(399);
+        SubwayStations.Station station5 = stations.stations.get(415);
+
         //when
-        List<String> connections = stationsList.getConnections("182nd-183rd Sts");
+        List<SubwayStations.Station> connections = stations.getConnections(subwayLines, station1);
+        List<SubwayStations.Station> expectedList = new ArrayList<SubwayStations.Station>(Arrays.asList(station2, station3, station4, station5));
 
         //then
-        Assertions.assertNotNull(connections);
-        Assertions.assertEquals("263",connections.get(0));
-        Assertions.assertTrue(connections.contains("171"));
+        Assertions.assertEquals(stations.getConnections(subwayLines, station1), expectedList);
 
     }
 }
