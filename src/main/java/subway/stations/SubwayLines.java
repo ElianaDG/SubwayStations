@@ -6,24 +6,24 @@ import java.util.List;
 
 public class SubwayLines {
 
-    List<String> A, B, C, D, E, F, G, J, L, M, N, Q, R, S, W, Z;
+    List<Integer> A, B, C, D, E, F, G, J, L, M, N, Q, R, S, W, Z;
     @SerializedName("7 Express")
-    List<String> sevenExpress;
+    List<Integer> sevenExpress;
     @SerializedName("6 Express")
-    List<String> sixExpress;
+    List<Integer> sixExpress;
     @SerializedName("1")
-    List<String> one;
+    List<Integer> one;
     @SerializedName("2")
-    List<String> two;
+    List<Integer> two;
     @SerializedName("3")
-    List<String> three;
+    List<Integer> three;
     @SerializedName("4")
-    List<String> four;
+    List<Integer> four;
     @SerializedName("5")
-    List<String> five;
+    List<Integer> five;
     @SerializedName("6")
-    List<String> six;
+    List<Integer> six;
     @SerializedName("7")
-    List<String> seven;
+    List<Integer> seven;
 
 }

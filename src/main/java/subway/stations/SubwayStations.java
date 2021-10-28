@@ -20,8 +20,8 @@ public class SubwayStations {
             return properties.name;
         }
 
-        public String getObjectId() {
-            return properties.objectid;
+        public int getObjectId() {
+            return Integer.parseInt(properties.objectid);
         }
 
         public List<Double> getCoordinates() {
@@ -68,20 +68,20 @@ public class SubwayStations {
         return connections;
     }
 
-    private void addNeighbors(Station station, List<Station> connections, List<String> lineStationIds) {
+    private void addNeighbors(Station station, List<Station> connections, List<Integer> lineStationIds) {
 
         if (lineStationIds.contains(station.getObjectId())) {
 
             int stationIndex = lineStationIds.indexOf(station.getObjectId());
 
             if(stationIndex > 0){
-                String previousStationId = lineStationIds.get(stationIndex - 1);
-                Station previousStation = stations.get(Integer.parseInt(previousStationId) - 1);
+                int previousStationId = lineStationIds.get(stationIndex - 1);
+                Station previousStation = stations.get(previousStationId - 1);
                 connections.add(previousStation);
             }
             if(stationIndex < lineStationIds.size() - 1){
-                String nextStationId = lineStationIds.get(stationIndex + 1);
-                Station nextStation = stations.get(Integer.parseInt(nextStationId) - 1);
+                int nextStationId = lineStationIds.get(stationIndex + 1);
+                Station nextStation = stations.get(nextStationId - 1);
                 connections.add(nextStation);
             }
         }

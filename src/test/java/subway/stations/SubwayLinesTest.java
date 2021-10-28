@@ -24,13 +24,13 @@ public class SubwayLinesTest {
         //then
         Assertions.assertNotNull(subwayLines.A);
         Assertions.assertNotNull(subwayLines.A.get(0));
-        Assertions.assertEquals("55", subwayLines.A.get(0));
+        Assertions.assertEquals(55, subwayLines.A.get(0));
         Assertions.assertNotNull(subwayLines.one);
         Assertions.assertNotNull(subwayLines.one.get(0));
-        Assertions.assertEquals("418", subwayLines.one.get(0));
+        Assertions.assertEquals(418, subwayLines.one.get(0));
         Assertions.assertNotNull(subwayLines.sixExpress);
         Assertions.assertNotNull(subwayLines.sixExpress.get(0));
-        Assertions.assertEquals("29", subwayLines.sixExpress.get(0));
+        Assertions.assertEquals(29, subwayLines.sixExpress.get(0));
 
     }
 }
