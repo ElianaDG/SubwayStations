@@ -2,7 +2,6 @@ package subway.stations;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +11,8 @@ public class SubwayStations {
     List<Station> stations;
 
     public static class Station {
+
+        List<Station> connections;
 
         Properties properties;
         Geometry geometry;
@@ -30,12 +31,6 @@ public class SubwayStations {
     }
 
     public List<Station> getConnections(SubwayLines subwayLines, Station station) {
-
-//        List<Station> stationsList = new ArrayList<>();
-//
-//        stationsList.addAll(stations);
-//
-//        int stationIndex = stationsList.indexOf(station);
 
         List<Station> connections = new ArrayList<>();
 
