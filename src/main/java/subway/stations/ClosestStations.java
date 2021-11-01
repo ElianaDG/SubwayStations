@@ -7,7 +7,7 @@ public class ClosestStations {
 
     List<Double> currentLocation;
 
-    public List<SubwayStations.Station> getClosestStations(List<Double> currentCoordinates, SubwayStations subwayStations){
+    public List<SubwayStations.Station> getClosestStations(List<Double> currentLocation, SubwayStations subwayStations){
 
         List<SubwayStations.Station> closestStations = new ArrayList<>();
         List<Double> shortestDistances = new ArrayList<>();
@@ -16,7 +16,7 @@ public class ClosestStations {
         double distanceFromMe;
 
         for(int ix = 0; ix < subwayStations.stations.size(); ix++){
-            distanceFromMe = distanceFormula(currentCoordinates, subwayStations.stations.get(ix).getCoordinates());
+            distanceFromMe = distanceFormula(currentLocation, subwayStations.stations.get(ix).getCoordinates());
             allDistances.add(distanceFromMe);
         }
         shortestDistances.add(allDistances.get(0));
