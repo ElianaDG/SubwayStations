@@ -49,15 +49,13 @@ public class SubwayStationsTest {
         SubwayStations.Station station1 = stations.stations.get(416);
         SubwayStations.Station station2 = stations.stations.get(399);
         SubwayStations.Station station3 = stations.stations.get(415);
-        SubwayStations.Station station4 = stations.stations.get(399);
-        SubwayStations.Station station5 = stations.stations.get(415);
 
         //when
         List<SubwayStations.Station> connections = stations.getConnections(subwayLines, station1);
-        List<SubwayStations.Station> expectedList = new ArrayList<SubwayStations.Station>(Arrays.asList(station2, station3, station4, station5));
+        List<SubwayStations.Station> expectedList = new ArrayList<>(Arrays.asList(station2, station3, station2, station3));
 
         //then
-        Assertions.assertEquals(stations.getConnections(subwayLines, station1), expectedList);
+        Assertions.assertEquals(connections, expectedList);
 
     }
 }
