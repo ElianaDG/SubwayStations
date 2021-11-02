@@ -13,36 +13,32 @@ public class ClosestStations {
         List<SubwayStations.Station> closestStations = new ArrayList<>();
         //get(0) is station closest to origin, get(1) is station closest to destination
 
-        double shortestDistance = 10000;
-        int closestStation = 0;
+        double shortestDistanceToOrigin = 10000;
+        double shortestDistanceToDestination = 10000;
+        int closestStationToOrigin = 0;
+        int closestStationToDestination = 0;
 
         for(int ix = 0; ix < subwayStations.stations.size(); ix++){
-            double distanceFromMe = distanceFormula(currentCoordinates, subwayStations.stations.get(ix).getCoordinates());
-            if(distanceFromMe < shortestDistance){
-                shortestDistance = distanceFromMe;
-                closestStation = ix;
+            double distance = distanceFormula(currentCoordinates, subwayStations.stations.get(ix).getCoordinates());
+            if(distance < shortestDistanceToOrigin){
+                shortestDistanceToOrigin = distance;
+                closestStationToOrigin = ix;
+            }
+            distance = distanceFormula(destinationCoordinates, subwayStations.stations.get(ix).getCoordinates());
+            if(distance < shortestDistanceToDestination){
+                shortestDistanceToDestination = distance;
+                closestStationToDestination = ix;
             }
         }
-        closestStations.add(subwayStations.stations.get(closestStation));
-
-        shortestDistance = 10000;
-        closestStation = 0;
-
-        for(int ix = 0; ix < subwayStations.stations.size(); ix++){
-            double distanceFromMe = distanceFormula(destinationCoordinates, subwayStations.stations.get(ix).getCoordinates());
-            if(distanceFromMe < shortestDistance){
-                shortestDistance = distanceFromMe;
-                closestStation = ix;
-            }
-        }
-        closestStations.add(subwayStations.stations.get(closestStation));
+        closestStations.add(subwayStations.stations.get(closestStationToOrigin));
+        closestStations.add(subwayStations.stations.get(closestStationToDestination));
 
         return closestStations;
     }
 
-    public double distanceFormula(List<Double> originCoordinates, List<Double> stationCoordinates){
-        double x = stationCoordinates.get(0) - originCoordinates.get(0);
-        double y = stationCoordinates.get(1) - originCoordinates.get(1);
+    public double distanceFormula(List<Double> xCoordinates, List<Double> yCoordinates){
+        double x = yCoordinates.get(0) - xCoordinates.get(0);
+        double y = yCoordinates.get(1) - xCoordinates.get(1);
         double xSquared = x * x;
         double ySquared = y * y;
 
