@@ -1,17 +1,27 @@
 package subway.stations;
 
+import subway.stations.SubwayStations.Station;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClosestStations {
+public class ShortestPath {
 
     List<Double> currentCoordinates;
     List<Double> destinationCoordinates;
+    List<Station> closestStations; //get(0) is station closest to origin, get(1) is station closest to destination
 
-    public List<SubwayStations.Station> getClosestStations(List<Double> currentCoordinates, List<Double> destinationCoordinates, SubwayStations subwayStations){
+    //distance from current node to connecting node is always 1
+    public List<Station> getShortestPath(StationNode stationNode, List<Station> closestStations){
+        Station originStation = closestStations.get(0);
+        Station destinationStation = closestStations.get(1);
+        List<Station> pathList = new ArrayList<>();
+
+        return pathList;
+    }
+
+    public List<Station> getClosestStations(List<Double> currentCoordinates, List<Double> destinationCoordinates, SubwayStations subwayStations){
 
         List<SubwayStations.Station> closestStations = new ArrayList<>();
-        //get(0) is station closest to origin, get(1) is station closest to destination
 
         double shortestDistanceToOrigin = 10000;
         double shortestDistanceToDestination = 10000;
