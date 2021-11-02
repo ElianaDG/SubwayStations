@@ -36,9 +36,9 @@ public class ClosestStations {
         return closestStations;
     }
 
-    public double distanceFormula(List<Double> xCoordinates, List<Double> yCoordinates){
-        double x = yCoordinates.get(0) - xCoordinates.get(0);
-        double y = yCoordinates.get(1) - xCoordinates.get(1);
+    public double distanceFormula(List<Double> fromCoordinates, List<Double> toCoordinates){
+        double x = toCoordinates.get(0) - fromCoordinates.get(0);
+        double y = toCoordinates.get(1) - fromCoordinates.get(1);
         double xSquared = x * x;
         double ySquared = y * y;
 
