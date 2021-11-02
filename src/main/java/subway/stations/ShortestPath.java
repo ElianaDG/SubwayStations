@@ -3,6 +3,7 @@ package subway.stations;
 import subway.stations.SubwayStations.Station;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ShortestPath {
 
@@ -11,9 +12,10 @@ public class ShortestPath {
     List<Station> closestStations; //get(0) is station closest to origin, get(1) is station closest to destination
 
     //distance from current node to connecting node is always 1
-    public List<Station> getShortestPath(StationNode stationNode, List<Station> closestStations){
+    public List<Station> dijkstrasAlgorithm(Map map, List<Station> closestStations){
         Station originStation = closestStations.get(0);
         Station destinationStation = closestStations.get(1);
+        List<StationNode> visitedStations;
         List<Station> pathList = new ArrayList<>();
 
         return pathList;

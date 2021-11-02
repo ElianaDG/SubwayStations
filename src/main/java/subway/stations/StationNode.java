@@ -6,10 +6,10 @@ public class StationNode {
 
     private final List<StationNode> adjacentStations;
     private int distanceFromOrigin;
-    private List<StationNode> visitedStations;
 
-    public StationNode(List<StationNode> adjacentStations) {
+    public StationNode(List<StationNode> adjacentStations, int distanceFromOrigin) {
         this.adjacentStations = adjacentStations;
+        this.distanceFromOrigin = distanceFromOrigin;
     }
 
     public List<StationNode> getAdjacentStations() {
