@@ -2,10 +2,7 @@ package subway.stations;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class SubwayStations {
 
@@ -33,39 +30,71 @@ public class SubwayStations {
         }
     }
 
-    public void dijkstrasAlgorithm(Station source, Station destination){
-        //get current source
+    public List<Station> dijkstrasAlgorithm(Station source, Station destination){
+
         Set<Station> visitedStations = new HashSet<>();
         Set<Station> unvisitedStations = new HashSet<>();
+
         Station currentSource = source;
-        int shortestTotalDistance = Integer.MAX_VALUE;
-        //start loop here
-        while(!currentSource.connections.contains(destination)){
-            unvisitedStations.addAll(currentSource.connections);
+        int shortestDistance = Integer.MAX_VALUE;
+
+        while(!(currentSource.connections.contains(destination))){
             visitedStations.add(currentSource);
-            //get connections of source
-            List<Station> connections = source.connections;
-            for (Station station : connections) {
-                station.previous = currentSource;   //set parent of station for path tracing
-                station.distanceFromSource++;
+            unvisitedStations.addAll(currentSource.connections);
+
+            for (Station station : currentSource.connections) {
+                station.previous = currentSource;
+                station.distanceFromSource = station.previous.distanceFromSource + 1;
                 int thisDistance = station.distanceFromSource;
-                if (thisDistance < shortestTotalDistance) {
-                    shortestTotalDistance = thisDistance;
+                if (thisDistance < shortestDistance) {
+                    shortestDistance = thisDistance;
                 }
             }
-            //check which station has the shortest distance
+
             int shortestDistanceInSet = Integer.MAX_VALUE;
-            //get station with shortest distance
+
             for (Station station : unvisitedStations) {
                 int thisDistance = station.distanceFromSource;
+                if (thisDistance == shortestDistanceInSet) {
+                    currentSource = station;
+                }
                 if (thisDistance < shortestDistanceInSet) {
                     shortestDistanceInSet = thisDistance;
                     currentSource = station;
                 }
             }
             unvisitedStations.remove(currentSource);
-            //repeat until connections list contains the destination station
+            visitedStations.add(currentSource);
         }
+
+        //get the path of the shortest distance
+        Stack<Station> pathStack = new Stack<>();
+        pathStack.push(destination);
+        List<Station> destinationConnections = destination.connections;
+        Station lastStationInPath = destination;
+        for(Station station : destinationConnections){
+            if(visitedStations.contains(station)){
+                if(station.distanceFromSource == shortestDistance){
+                    lastStationInPath = station;
+                }
+            }
+        }
+
+        Station currentStation = lastStationInPath;
+        pathStack.push(currentStation);
+
+        while (!(currentStation.equals(source))){
+            currentStation = currentStation.previous;
+            pathStack.push(currentStation);
+        }
+
+        List<Station> shortestPath = new ArrayList<>();
+
+        while(!pathStack.isEmpty()){
+            shortestPath.add(pathStack.pop());
+        }
+
+        return shortestPath;
     }
 
     public List<Station> getConnections(SubwayLines subwayLines, Station station) {
