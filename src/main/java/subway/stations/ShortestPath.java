@@ -2,23 +2,48 @@ package subway.stations;
 
 import subway.stations.SubwayStations.Station;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 public class ShortestPath {
 
     List<Double> currentCoordinates;
     List<Double> destinationCoordinates;
-    List<Station> closestStations; //get(0) is station closest to origin, get(1) is station closest to destination
 
-    //distance from current node to connecting node is always 1
-    public List<Station> dijkstrasAlgorithm(Map map, List<Station> closestStations){
-        Station originStation = closestStations.get(0);
-        Station destinationStation = closestStations.get(1);
-        List<StationNode> visitedStations;
-        List<Station> pathList = new ArrayList<>();
-
-        return pathList;
+    public void dijkstrasAlgorithm(Station source, Station destination){
+        //get current source
+        Set<Station> visitedStations = new HashSet<>();
+        Set<Station> unvisitedStations = new HashSet<>();
+        Station currentSource = source;
+        int shortestTotalDistance = Integer.MAX_VALUE;
+        //start loop here
+        while(!currentSource.connections.contains(destination)){
+            unvisitedStations.addAll(currentSource.connections);
+            visitedStations.add(currentSource);
+            //get connections of source
+            List<Station> connections = source.connections;
+            for (Station station : connections) {
+                station.previous = currentSource;   //set parent of station for path tracing
+                station.distanceFromSource++;
+                int thisDistance = station.distanceFromSource;
+                if (thisDistance < shortestTotalDistance) {
+                    shortestTotalDistance = thisDistance;
+                }
+            }
+            //check which station has the shortest distance
+            int shortestDistanceInSet = Integer.MAX_VALUE;
+            //get station with shortest distance
+            for (Station station : unvisitedStations) {
+                int thisDistance = station.distanceFromSource;
+                if (thisDistance < shortestDistanceInSet) {
+                    shortestDistanceInSet = thisDistance;
+                    currentSource = station;
+                }
+            }
+            unvisitedStations.remove(currentSource);
+            //repeat until connections list contains the destination station
+        }
     }
 
     public List<Station> getClosestStations(List<Double> currentCoordinates, List<Double> destinationCoordinates, SubwayStations subwayStations){

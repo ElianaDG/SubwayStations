@@ -13,7 +13,8 @@ public class SubwayStations {
     public static class Station {
 
         List<Station> connections;
-
+        int distanceFromSource = 0;
+        Station previous;
         Properties properties;
         Geometry geometry;
 
