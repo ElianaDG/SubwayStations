@@ -3,7 +3,9 @@ package subway.stations;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SubwayStations {
 
@@ -28,6 +30,41 @@ public class SubwayStations {
 
         public List<Double> getCoordinates() {
             return geometry.coordinates;
+        }
+    }
+
+    public void dijkstrasAlgorithm(Station source, Station destination){
+        //get current source
+        Set<Station> visitedStations = new HashSet<>();
+        Set<Station> unvisitedStations = new HashSet<>();
+        Station currentSource = source;
+        int shortestTotalDistance = Integer.MAX_VALUE;
+        //start loop here
+        while(!currentSource.connections.contains(destination)){
+            unvisitedStations.addAll(currentSource.connections);
+            visitedStations.add(currentSource);
+            //get connections of source
+            List<Station> connections = source.connections;
+            for (Station station : connections) {
+                station.previous = currentSource;   //set parent of station for path tracing
+                station.distanceFromSource++;
+                int thisDistance = station.distanceFromSource;
+                if (thisDistance < shortestTotalDistance) {
+                    shortestTotalDistance = thisDistance;
+                }
+            }
+            //check which station has the shortest distance
+            int shortestDistanceInSet = Integer.MAX_VALUE;
+            //get station with shortest distance
+            for (Station station : unvisitedStations) {
+                int thisDistance = station.distanceFromSource;
+                if (thisDistance < shortestDistanceInSet) {
+                    shortestDistanceInSet = thisDistance;
+                    currentSource = station;
+                }
+            }
+            unvisitedStations.remove(currentSource);
+            //repeat until connections list contains the destination station
         }
     }
 
