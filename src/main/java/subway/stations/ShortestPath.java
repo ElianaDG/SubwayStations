@@ -50,8 +50,8 @@ public class ShortestPath {
 
         List<SubwayStations.Station> closestStations = new ArrayList<>();
 
-        double shortestDistanceToOrigin = 10000;
-        double shortestDistanceToDestination = 10000;
+        double shortestDistanceToOrigin = Double.MAX_VALUE;
+        double shortestDistanceToDestination = Double.MAX_VALUE;
         int closestStationToOrigin = 0;
         int closestStationToDestination = 0;
 
