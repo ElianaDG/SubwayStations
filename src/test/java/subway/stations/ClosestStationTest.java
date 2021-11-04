@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class ClosestStationTest {
     }
 
     @Test
-    public void getClosestStationTest() throws IOException {
+    public void getClosestStation() throws IOException {
         //given
         Gson gson = new Gson();
         Reader reader = Files.newBufferedReader(Paths.get("SubwayStations.json"));
@@ -39,10 +38,8 @@ public class ClosestStationTest {
         List<Double> coordinates = Arrays.asList(-73.99106999861965, 40.73005400028977);
 
         //when
-        List<SubwayStations.Station> actualClosestStation = closestStation.getClosestStation(coordinates, stationsList);
-        List<SubwayStations.Station> expectedClosestStation = Arrays.asList(
-           stationsList.stations.get(0), stationsList.stations.get(1)
-        );
+        SubwayStations.Station actualClosestStation = closestStation.getClosestStation(coordinates, stationsList);
+        SubwayStations.Station expectedClosestStation = stationsList.stations.get(0);
 
         //then
         Assertions.assertEquals(expectedClosestStation, actualClosestStation);

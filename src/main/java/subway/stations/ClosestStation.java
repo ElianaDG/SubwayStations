@@ -6,9 +6,9 @@ import java.util.List;
 
 public class ClosestStation {
 
-    public List<Station> getClosestStation( List<Double> coordinates, SubwayStations subwayStations){
+    public Station getClosestStation( List<Double> coordinates, SubwayStations subwayStations){
 
-        List<SubwayStations.Station> closestStations = new ArrayList<>();
+        Station station;
 
         double shortestDistance = Double.MAX_VALUE;
         int closestStation = 0;
@@ -20,9 +20,9 @@ public class ClosestStation {
                 closestStation = ix;
             }
         }
-        closestStations.add(subwayStations.stations.get(closestStation));
+        station = subwayStations.stations.get(closestStation);
 
-        return closestStations;
+        return station;
     }
 
     public double distanceFormula(List<Double> fromCoordinates, List<Double> toCoordinates){

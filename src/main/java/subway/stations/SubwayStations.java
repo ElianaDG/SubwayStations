@@ -41,23 +41,21 @@ public class SubwayStations {
             unvisitedStations.addAll(currentSource.connections);
 
             for (Station station : currentSource.connections) {
-                station.previous = currentSource;
-                station.distanceFromSource = station.previous.distanceFromSource + 1;
+                station.distanceFromSource = currentSource.distanceFromSource + 1;
                 int thisDistance = station.distanceFromSource;
                 if (thisDistance < shortestDistance) {
                     shortestDistance = thisDistance;
+                    station.previous = currentSource;
                 }
             }
 
-            int shortestDistanceInSet = Integer.MAX_VALUE;
-
             for (Station station : unvisitedStations) {
                 int thisDistance = station.distanceFromSource;
-                if (thisDistance == shortestDistanceInSet) {
+                if (thisDistance == shortestDistance) {
                     currentSource = station;
                 }
-                if (thisDistance < shortestDistanceInSet) {
-                    shortestDistanceInSet = thisDistance;
+                if (thisDistance < shortestDistance) {
+                    shortestDistance = thisDistance;
                     currentSource = station;
                 }
             }
@@ -76,6 +74,12 @@ public class SubwayStations {
             }
         }
 
+        reversePath(source, path, lastStationInPath);
+
+        return path;
+    }
+
+    private void reversePath(Station source, List<Station> path, Station lastStationInPath) {
         Station currentStation = lastStationInPath;
         path.add(currentStation);
 
@@ -87,8 +91,6 @@ public class SubwayStations {
         path.add(source);
 
         Collections.reverse(path);
-
-        return path;
     }
 
     public List<Station> getConnections(SubwayLines subwayLines, Station station) {
