@@ -30,16 +30,14 @@ public class SubwayStations {
         }
     }
 
-    public List<Station> dijkstrasAlgorithm(Station source, Station destination){
+    public List<Station> dijkstrasAlgorithm(Station source, Station destination) {
 
-        Set<Station> visitedStations = new HashSet<>();
         Set<Station> unvisitedStations = new HashSet<>();
 
         Station currentSource = source;
         int shortestDistance = Integer.MAX_VALUE;
 
-        while(!(currentSource.connections.contains(destination))){
-            visitedStations.add(currentSource);
+        while (!(currentSource.connections.contains(destination))) {
             unvisitedStations.addAll(currentSource.connections);
 
             for (Station station : currentSource.connections) {
@@ -64,37 +62,33 @@ public class SubwayStations {
                 }
             }
             unvisitedStations.remove(currentSource);
-            visitedStations.add(currentSource);
         }
 
-        //get the path of the shortest distance
-        Stack<Station> pathStack = new Stack<>();
-        pathStack.push(destination);
+        List<Station> path = new ArrayList<>();
+        path.add(destination);
+
         List<Station> destinationConnections = destination.connections;
         Station lastStationInPath = destination;
-        for(Station station : destinationConnections){
-            if(visitedStations.contains(station)){
-                if(station.distanceFromSource == shortestDistance){
-                    lastStationInPath = station;
-                }
+
+        for (Station station : destinationConnections) {
+            if (station.distanceFromSource == shortestDistance) {
+                lastStationInPath = station;
             }
         }
 
         Station currentStation = lastStationInPath;
-        pathStack.push(currentStation);
+        path.add(currentStation);
 
-        while (!(currentStation.equals(source))){
+        while (!(currentStation.equals(source))) {
             currentStation = currentStation.previous;
-            pathStack.push(currentStation);
+            path.add(currentStation);
         }
 
-        List<Station> shortestPath = new ArrayList<>();
+        path.add(source);
 
-        while(!pathStack.isEmpty()){
-            shortestPath.add(pathStack.pop());
-        }
+        Collections.reverse(path);
 
-        return shortestPath;
+        return path;
     }
 
     public List<Station> getConnections(SubwayLines subwayLines, Station station) {
@@ -136,12 +130,12 @@ public class SubwayStations {
 
             int stationIndex = lineStationIds.indexOf(station.getObjectId());
 
-            if(stationIndex > 0){
+            if (stationIndex > 0) {
                 int previousStationId = lineStationIds.get(stationIndex - 1);
                 Station previousStation = stations.get(previousStationId - 1);
                 connections.add(previousStation);
             }
-            if(stationIndex < lineStationIds.size() - 1){
+            if (stationIndex < lineStationIds.size() - 1) {
                 int nextStationId = lineStationIds.get(stationIndex + 1);
                 Station nextStation = stations.get(nextStationId - 1);
                 connections.add(nextStation);

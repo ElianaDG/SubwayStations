@@ -51,7 +51,7 @@ public class SubwayStationsTest {
 
         //when
         List<SubwayStations.Station> connections = stations.getConnections(subwayLines, station1);
-        List<SubwayStations.Station> expectedList = new ArrayList<>(Arrays.asList(station2, station3, station2, station3));
+        List<SubwayStations.Station> expectedList = Arrays.asList(station2, station3, station2, station3);
 
         //then
         Assertions.assertEquals(connections, expectedList);
