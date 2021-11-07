@@ -61,6 +61,8 @@ public class SubwayStationsTest {
         Gson gson = new Gson();
         Reader reader = Files.newBufferedReader(Paths.get("SubwayStations.json"));
         SubwayStations stations = gson.fromJson(reader, SubwayStations.class);
+        reader = Files.newBufferedReader(Paths.get("SubwayLines.json"));
+        SubwayLines subwayLines = gson.fromJson(reader, SubwayLines.class);
         reader.close();
 
         SubwayStations.Station source = stations.stations.get(15);
@@ -69,11 +71,11 @@ public class SubwayStationsTest {
         SubwayStations.Station station2 = stations.stations.get(16);
 
         //when
-        List<SubwayStations.Station> shortestPath = stations.dijkstrasAlgorithm(source, destination);
+        List<SubwayStations.Station> shortestPath = stations.dijkstrasAlgorithm(source, destination, subwayLines);
         List<SubwayStations.Station> expectedPath = Arrays.asList(source, station1, station2, destination);
 
         //then
-        Assertions.assertEquals(shortestPath,expectedPath);
+        Assertions.assertEquals(expectedPath,shortestPath);
 
     }
 }

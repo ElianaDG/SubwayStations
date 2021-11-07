@@ -30,12 +30,13 @@ public class SubwayStations {
         }
     }
 
-    public List<Station> dijkstrasAlgorithm(Station source, Station destination) {
+    public List<Station> dijkstrasAlgorithm(Station source, Station destination, SubwayLines lines) {
 
         Set<Station> unvisitedStations = new HashSet<>();
 
         for(Station station : stations){
             station.distanceFromSource = Integer.MAX_VALUE;
+            station.connections = getConnections(lines, station);
             unvisitedStations.add(station);
         }
         Station currentSource = source;
@@ -80,8 +81,6 @@ public class SubwayStations {
             path.add(currentStation.previous);
             currentStation = currentStation.previous;
         }
-        path.add(source);
-
         Collections.reverse(path);
         return path;
     }
@@ -103,7 +102,6 @@ public class SubwayStations {
         addNeighbors(station, connections, subwayLines.N);
         addNeighbors(station, connections, subwayLines.Q);
         addNeighbors(station, connections, subwayLines.R);
-        addNeighbors(station, connections, subwayLines.S);
         addNeighbors(station, connections, subwayLines.W);
         addNeighbors(station, connections, subwayLines.Z);
         addNeighbors(station, connections, subwayLines.sevenExpress);

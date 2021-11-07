@@ -6,7 +6,7 @@ import java.util.List;
 
 public class SubwayLines {
 
-    List<Integer> A, B, C, D, E, F, G, J, L, M, N, Q, R, S, W, Z;
+    List<Integer> A, B, C, D, E, F, G, J, L, M, N, Q, R, W, Z;
     @SerializedName("7 Express")
     List<Integer> sevenExpress;
     @SerializedName("6 Express")
