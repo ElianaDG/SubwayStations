@@ -2,8 +2,7 @@ package subway.stations;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class SubwayStations {
 
@@ -13,7 +12,8 @@ public class SubwayStations {
     public static class Station {
 
         List<Station> connections;
-
+        int distanceFromSource = 0;
+        Station previous;
         Properties properties;
         Geometry geometry;
 
@@ -28,6 +28,61 @@ public class SubwayStations {
         public List<Double> getCoordinates() {
             return geometry.coordinates;
         }
+    }
+
+    public List<Station> dijkstrasAlgorithm(Station source, Station destination, SubwayLines lines) {
+
+        Set<Station> unvisitedStations = new HashSet<>();
+
+        for(Station station : stations){
+            station.distanceFromSource = Integer.MAX_VALUE;
+            station.connections = getConnections(lines, station);
+            unvisitedStations.add(station);
+        }
+        Station currentSource = source;
+        currentSource.distanceFromSource = 0;
+        int shortestDistance;
+
+        while (!(currentSource.connections.contains(destination))) {
+            for(Station station : currentSource.connections){
+                if(unvisitedStations.contains(station)){
+                    station.distanceFromSource = currentSource.distanceFromSource + 1;
+                    station.previous = currentSource;
+                }
+            }
+            unvisitedStations.remove(currentSource);
+            shortestDistance = currentSource.distanceFromSource + 1;
+
+            for (Station station : unvisitedStations) {
+                int thisDistance = station.distanceFromSource;
+                if (thisDistance == shortestDistance) {
+                    currentSource = station;
+                }
+            }
+            for(Station station : unvisitedStations){
+                int thisDistance = station.distanceFromSource;
+                if (thisDistance < shortestDistance) {
+                    shortestDistance = thisDistance;
+                    currentSource = station;
+                }
+            }
+        }
+
+        return getPath(source, destination, currentSource);
+    }
+
+    private List<Station> getPath(Station source, Station destination, Station currentSource) {
+        List<Station> path = new ArrayList<>();
+        path.add(destination);
+        path.add(currentSource);
+        Station currentStation = currentSource;
+
+        while(!(currentStation.previous == null)){
+            path.add(currentStation.previous);
+            currentStation = currentStation.previous;
+        }
+        Collections.reverse(path);
+        return path;
     }
 
     public List<Station> getConnections(SubwayLines subwayLines, Station station) {
@@ -47,7 +102,6 @@ public class SubwayStations {
         addNeighbors(station, connections, subwayLines.N);
         addNeighbors(station, connections, subwayLines.Q);
         addNeighbors(station, connections, subwayLines.R);
-        addNeighbors(station, connections, subwayLines.S);
         addNeighbors(station, connections, subwayLines.W);
         addNeighbors(station, connections, subwayLines.Z);
         addNeighbors(station, connections, subwayLines.sevenExpress);
@@ -69,12 +123,12 @@ public class SubwayStations {
 
             int stationIndex = lineStationIds.indexOf(station.getObjectId());
 
-            if(stationIndex > 0){
+            if (stationIndex > 0) {
                 int previousStationId = lineStationIds.get(stationIndex - 1);
                 Station previousStation = stations.get(previousStationId - 1);
                 connections.add(previousStation);
             }
-            if(stationIndex < lineStationIds.size() - 1){
+            if (stationIndex < lineStationIds.size() - 1) {
                 int nextStationId = lineStationIds.get(stationIndex + 1);
                 Station nextStation = stations.get(nextStationId - 1);
                 connections.add(nextStation);
@@ -91,3 +145,4 @@ class Properties {
 class Geometry {
     List<Double> coordinates;
 }
+
