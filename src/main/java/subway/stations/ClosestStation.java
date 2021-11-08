@@ -7,21 +7,18 @@ public class ClosestStation {
 
     public Station getClosestStation( List<Double> coordinates, SubwayStations subwayStations){
 
-        Station station;
-
         double shortestDistance = Double.MAX_VALUE;
-        int closestStation = 0;
+        Station closestStation = null;
 
-        for(int ix = 0; ix < subwayStations.stations.size(); ix++){
-            double distance = distanceFormula(coordinates, subwayStations.stations.get(ix).getCoordinates());
+        for(Station station : subwayStations.stations){
+            double distance = distanceFormula(coordinates, station.getCoordinates());
             if(distance < shortestDistance){
-                shortestDistance = distance;
-                closestStation = ix;
+                shortestDistance =  distance;
+                closestStation = station;
             }
         }
-        station = subwayStations.stations.get(closestStation);
 
-        return station;
+        return closestStation;
     }
 
     public double distanceFormula(List<Double> fromCoordinates, List<Double> toCoordinates){
