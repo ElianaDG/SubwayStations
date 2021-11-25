@@ -41,8 +41,6 @@ public class SubwayStations {
         }
         Station currentSource = source;
         currentSource.distanceFromSource = 0;
-        int shortestDistance;
-
         while (!(currentSource.connections.contains(destination))) {
             for(Station station : currentSource.connections){
                 if(unvisitedStations.contains(station)){
@@ -51,18 +49,11 @@ public class SubwayStations {
                 }
             }
             unvisitedStations.remove(currentSource);
-            shortestDistance = currentSource.distanceFromSource + 1;
+            int comparator = currentSource.distanceFromSource + 2;
 
-            for (Station station : unvisitedStations) {
-                int thisDistance = station.distanceFromSource;
-                if (thisDistance == shortestDistance) {
-                    currentSource = station;
-                }
-            }
             for(Station station : unvisitedStations){
                 int thisDistance = station.distanceFromSource;
-                if (thisDistance < shortestDistance) {
-                    shortestDistance = thisDistance;
+                if (thisDistance < comparator) {
                     currentSource = station;
                 }
             }
