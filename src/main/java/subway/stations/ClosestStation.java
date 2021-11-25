@@ -13,7 +13,7 @@ public class ClosestStation {
         for(Station station : subwayStations.stations){
             double distance = distanceFormula(coordinates, station.getCoordinates());
             if(distance < shortestDistance){
-                shortestDistance =  distance;
+                shortestDistance = distance;
                 closestStation = station;
             }
         }
